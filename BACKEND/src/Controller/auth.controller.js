@@ -36,19 +36,6 @@ export async function signup(req, res) {
             profilePic: randAvatar,
         })
 
-        try {
-            await upsertStreamUser({
-                id: newUser._id.toString(),
-                name: newUser.fullname,
-                image: newUser.profilePic || "",
-            });
-            console.log(`Stream user created for ${newUser.fullname}`);
-        } catch (error) {
-            console.log("error while  creating the stream user", error)
-        }
-
-
-
 
         const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET_KEY, {
             expiresIn: "7d",
