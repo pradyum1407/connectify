@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { Infinity } from "lucide-react"
 import { Link } from 'react-router';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { signUp } from '../lib/api';
+import useSignUpPage from '../hooks/useSignUpPage';
 
 const Signuppage = () => {
 
@@ -12,20 +11,15 @@ const Signuppage = () => {
     password: ""
   })
 
+  const {signUpMutation,isPending,error}=useSignUpPage()
 
-const queryClient=useQueryClient();
-const {mutate:signUpMutation,isPending,error}=useMutation({
-  mutationFn:signUp,
-  onSuccess:() => queryClient.invalidateQueries({queryKey:["authuser"]})
-})
-
-  const hadleSignup = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault()
-    signUpMutation(signupData);
+    signUpMutation(signupData)
   }
   return (
-    // outer div 
-    
+
+
     <div
       className="h-screen flex items-center justify-center p-4 sm:p-6 md:p-8"
       data-theme="forest"
@@ -35,7 +29,7 @@ const {mutate:signUpMutation,isPending,error}=useMutation({
 
         {/* SIGNUP FORM - LEFT SIDE */}
         <div className='w-full lg:w-1/2 p-4 sm:p-8 flex flex-col'>
-        
+
           {/* logo */}
           <div className="mb-4 flex items-center justify-start gap-2">
             <Infinity className='size-9 text-primary' />
@@ -48,15 +42,14 @@ const {mutate:signUpMutation,isPending,error}=useMutation({
           {/* ERROR MESSAGE IF ANY */}
           {error && (
             <div className="alert alert-error mb-4">
-              <span>{error.response.data.message}</span>
+              <span>{error.response?.data?.message || error.message || "An error occurred"}</span>
             </div>
-          )} 
+          )}
 
 
-              {/* form */}
-
+          {/* form */}
           <div className='w-full'>
-            <form onSubmit={hadleSignup}>
+            <form onSubmit={handleSignup}>
               <div className='space-y-4'>
                 <div >
                   <h2 className='text-xl font-semibold'>Create an account</h2>
@@ -114,7 +107,7 @@ const {mutate:signUpMutation,isPending,error}=useMutation({
                     </p>
                   </div>
 
-            {/* term and services */}
+                  {/* term and services */}
                   <div className="form-control">
                     <label className="label cursor-pointer justify-start gap-2">
                       <input type="checkbox" className="checkbox checkbox-sm" required />
@@ -126,13 +119,13 @@ const {mutate:signUpMutation,isPending,error}=useMutation({
                     </label>
                   </div>
                 </div>
-                 {/* Create account button  */}
+                {/* Create account button  */}
 
                 <button className='btn btn-primary w-full ' type='submit'>
                   {isPending ? (
                     <>
-                    <span className='loading loading-spinner loading-xs '></span>
-                    Loading...
+                      <span className='loading loading-spinner loading-xs '></span>
+                      Loading...
                     </>
                   ) : (
                     "Create Account"
@@ -144,7 +137,6 @@ const {mutate:signUpMutation,isPending,error}=useMutation({
                     Already have an account?{""}
                     <Link to="/login" className='text-primary hover:underline'> Sign In</Link>
                   </p>
-
                 </div>
 
 
@@ -164,7 +156,7 @@ const {mutate:signUpMutation,isPending,error}=useMutation({
 
             <div className="text-center space-y-3 mt-6">
               <h2 className="text-xl font-semibold">Connect with  our{""}
-              <span className='text-primary ml-2 font-semibold'>Alumni</span>
+                <span className='text-primary ml-2 font-semibold'>Alumni</span>
               </h2>
               <p className="opacity-70">
                 Practice conversations, make friends, and get feedbacks from them.

@@ -10,6 +10,7 @@ router.post("/signup",signup)
 router.post("/logout",logout)
 
 router.post("/onboarding",protectedRoute,onBoarding)
+
 router.get("/me",protectedRoute,(req,res)=>{
 res.status(200).json({success:true, user:req.user})
 })
