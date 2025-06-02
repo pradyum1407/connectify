@@ -45,10 +45,11 @@ export async function getMessage(req, res) {
 export async function sendMessage(req, res) {
     try {
         const { text, image } = req.body;
-        const { id: receiverId } = req.params;
+         const {id:receiverId} = req.params;
         const senderId = req.user._id;
 
-        if (senderId.toString() === receiverId) {
+        
+         if (senderId === receiverId) {
             return res.status(400).json({ message: "You cannot message yourself." });
         }
 

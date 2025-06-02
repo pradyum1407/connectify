@@ -29,7 +29,9 @@ const Homepage = () => {
 
   const { mutate: sendRequestMutataion, ispending } = useMutation({
     mutationFn: sendFriendRequest,
-    onSuccess: () => queryclient.invalidateQueries(["outgoingFriendReqs"])
+    onSuccess: () => {queryclient.invalidateQueries(["outgoingFriendReqs"]);
+      queryclient.invalidateQueries(["friends"]);
+    }
   })
 
   useEffect(() => {
@@ -41,7 +43,6 @@ const Homepage = () => {
       });
       setOutgoingRequestsIds(outgoingIds)
     }
-    console.log("outgoingFriendReqs", outgoingFriendReqs);
   }, [outgoingFriendReqs])
 
 
@@ -67,7 +68,7 @@ const Homepage = () => {
             (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {friends.map((friend) => (
-                  <FriendCard key={friend.id} friend={friend} />
+                  <FriendCard key={friend._id} friend={friend} />
                 ))
                 }
               </div>

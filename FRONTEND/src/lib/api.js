@@ -53,11 +53,22 @@ export async function sendFriendRequest(userId) {
 }
 
 export async function getfriendRequest() {
-const response =await axiosInstance.get("/users/friend-request") 
-return response.data
+  const response = await axiosInstance.get("/users/friend-request")
+  return response.data
 }
 
 export async function acceptFriendReqs(requestId) {
-  const response =await axiosInstance.put(`/users/friend-request/${requestId}/accept`)
+  const response = await axiosInstance.put(`/users/friend-request/${requestId}/accept`)
   return response.data
+}
+//  chat routes
+
+export async function getMessages(id) {
+  const response = await axiosInstance.get(`/chat/${id}`)
+  return response.data
+}
+
+export async function sendMessages(id,data) {
+const response = await  axiosInstance.post(`/chat/send/${id}`,data)
+return response.data
 }
