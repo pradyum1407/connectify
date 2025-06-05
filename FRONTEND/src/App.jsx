@@ -13,6 +13,7 @@ import Layout from "./components/Layout"
 import { Toaster } from "react-hot-toast";
 import useAuthUser from "./hooks/useAuthUser"
 import { useThemeStore } from "./store/usethemestore"
+import { useEffect } from "react"
 
 
 
@@ -23,9 +24,14 @@ const App = () => {
   const { isLoading, authUser } = useAuthUser();
   const isAuthenticated = Boolean(authUser)
   const isOnboarded = authUser?.isOnboarded
+
   if (isLoading) return <PageLoader />
 
+// useEffect(()=>{
+//   authUser
+// },[authUser])
 
+console.log({authUser});
 
   return (
     <div className="h-screen" data-theme={theme} >

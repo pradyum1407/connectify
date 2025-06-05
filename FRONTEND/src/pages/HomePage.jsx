@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { CheckCheckIcon, MapIcon, MapPinIcon, UserPlusIcon, UsersIcon } from "lucide-react";
 import FriendCard from "../components/FriendCard"
 import NoFriendFound from "../components/NoFriendFound";
+import useAuthUser from "../hooks/useAuthUser";
 
 const Homepage = () => {
   const queryclient = useQueryClient();
@@ -45,6 +46,7 @@ const Homepage = () => {
     }
   }, [outgoingFriendReqs])
 
+const {authUser}=useAuthUser()
 
   return (
     <div className=" p-4 sm:p-6 lg:p-6">

@@ -6,9 +6,9 @@ import chatRoutes from "./Routes/chat.route.js"
 import { connectDb } from "./Lib/db.js";
 import cookieParser from 'cookie-parser';
 import cors from "cors"
+import { app , server} from "./Lib/socket.js";
 
 dotenv.config();
-const app=express();
 const PORT =  process.env.PORT;
 
 app.use(cors({
@@ -24,7 +24,7 @@ app.use("/api/users", usersRoutes)
 app.use("/api/chat",chatRoutes)
 
 
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
 console.log(`server is running  on port ${PORT}`);
 connectDb();
 })

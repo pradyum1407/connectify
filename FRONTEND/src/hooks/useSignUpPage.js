@@ -5,8 +5,9 @@ const useSignUpPage=()=>{
  const queryClient = useQueryClient();
   const { mutate, isPending, error } = useMutation({
     mutationFn: signUp,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["authuser"])
+    onSuccess: (data) => {
+      queryClient.invalidateQueries(["authuser"]),
+      connectSocket(data.user._id);
     },
     onError: (err) => {
       console.error("Signup failed", err);
