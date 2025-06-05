@@ -3,18 +3,20 @@ import { useParams } from "react-router"
 import { getMessages, getUserFriends} from "../lib/api";
 import useAuthUser from "../hooks/useAuthUser";
 import Chatheader from "../components/Chatheader";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { formatMessageTime } from "../lib/utils"
 import MessageSkeleton from "../components/skeleton/MessageSkeleton"
 import MessageInput from "../components/MessageInput";
+import useSubscriberToMessage from "../hooks/useSubscriberToMessage";
+import { useSocketStore } from "../store/useSocketStore";
 
 
 const ChatPage = () => {
 
-  const { id } = useParams();
-  const { authUser } = useAuthUser()
+  const { id } = useParams(); //id of selected  user 
+  const { authUser } = useAuthUser()  //authuser._id this  will be my id  
   const messagEndRef = useRef(null)
-
+const { socket }=useSocketStore()  
   
 
   const { data: friends = [], isLoading: loadingFriends } = useQuery({
@@ -24,13 +26,22 @@ const ChatPage = () => {
 
   const selectedUser = friends.find(friend => friend._id === id);
 
-
+  
   const { data: messages = [], isLoading: isMessageLoading } = useQuery({
     queryKey: ["messages", id],
     queryFn: () => getMessages(id),
     enabled: !!id
   })
+  
+  
+  useSubscriberToMessage(socket,id)
 
+  
+useEffect(()=>{
+  if(messagEndRef.current && messages){
+    messagEndRef.current.scrollIntoView({behavior:"smooth"})
+  }
+},[messages])
 
   return (
     <>
@@ -63,8 +74,8 @@ const ChatPage = () => {
                     <img
                       src={
                         message.senderId === authUser._id
-                          ? authUser.profilePic
-                          : selectedUser.profilePic
+                          ? authUser?.profilePic
+                          : selectedUser?.profilePic
                       }
                       alt="profile pic"
                     />

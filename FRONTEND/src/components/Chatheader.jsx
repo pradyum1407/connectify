@@ -1,9 +1,10 @@
+import { useSocketStore } from "../store/useSocketStore"
 
+const Chatheader = ({ selectedUser }) => {
+  const { onlineUsers } = useSocketStore()
 
-const Chatheader = ({selectedUser}) => {
-
-    return (
-        <div className="p-3 sm:p-4 border-b border-base-300 bg-base-100">
+  return (
+    <div className="p-3 sm:p-4 border-b border-base-300 bg-base-100">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3 sm:gap-4">
           {/* Avatar */}
@@ -16,12 +17,16 @@ const Chatheader = ({selectedUser}) => {
           {/* User Info */}
           <div>
             <h3 className="font-semibold text-base sm:text-lg">{selectedUser.fullname}</h3>
+
+            <span className={onlineUsers.includes(selectedUser._id) ? "text-green-500" : "text-gray-400"}>
+              {onlineUsers.includes(selectedUser._id) ? "Online" : "Offline"}
+            </span>
           </div>
         </div>
 
       </div>
     </div>
-    )
+  )
 }
 
 export default Chatheader

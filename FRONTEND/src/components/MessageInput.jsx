@@ -10,7 +10,7 @@ const MessageInput = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
   const queryClient = useQueryClient()
-  const { id } = useParams();
+  const {id}=useParams()
   
   //mutation 
   const { mutate: sendMessageMutation, isPending } = useMutation({
@@ -57,6 +57,7 @@ const MessageInput = () => {
 
     try {
       const data = {
+        id:id,
         text: text.trim(),
         image: imagePreview,
       }

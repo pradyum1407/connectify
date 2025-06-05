@@ -2,6 +2,8 @@ import User from "../Models/User.js"
 import Message from "../Models/chat.js";
 import FriendRequest from "../Models/friendRequest.js";
 import cloudinary from "../Lib/cloudinary.js"
+import { getReceiverSocketId, io } from "../Lib/socket.js";
+
 
 export async function getMessage(req, res) {
     try {
@@ -45,11 +47,11 @@ export async function getMessage(req, res) {
 export async function sendMessage(req, res) {
     try {
         const { text, image } = req.body;
-         const {id:receiverId} = req.params;
-        const senderId = req.user._id;
+        const receiverId =  req.params.id?.toString();
+        const senderId = req.user._id?.toString();
 
-        
-         if (senderId === receiverId) {
+
+        if (senderId === receiverId) {
             return res.status(400).json({ message: "You cannot message yourself." });
         }
 
@@ -81,7 +83,11 @@ export async function sendMessage(req, res) {
         await newMessage.save()
         res.status(201).json(newMessage)
 
-        //need to add the functionality of the socket.io
+        //the implementation of chat from the socket.io 
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit("newMessage", newMessage)
+        }
 
     } catch (error) {
         console.log("error in the send message controller", error);
