@@ -6,7 +6,7 @@ import LoginPage from "./pages/LoginPage"
 import OnboardPage from './pages/OnboardPage'
 import ChatPage from "./pages/ChatPage"
 import NotificationPage from "./pages/NotificationPage"
-import PageLoader from "./components/pageLoader"
+import PageLoader from "./components/PageLoader"
 import Layout from "./components/Layout"
 
 
