@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useEffect, useState } from "react";
 import { getOutgoingFriendReqs, getRecommendedUser, getUserFriends, sendFriendRequest } from "../lib/api";
 import { Link } from "react-router";
-import { CheckCheckIcon, MapIcon, MapPinIcon, UserPlusIcon, UsersIcon } from "lucide-react";
+import { CheckCheckIcon,  MapPinIcon, UserPlusIcon, UsersIcon } from "lucide-react";
 import FriendCard from "../components/FriendCard"
 import NoFriendFound from "../components/NoFriendFound";
 import useAuthUser from "../hooks/useAuthUser";

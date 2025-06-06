@@ -3,8 +3,8 @@ import useAuthUser from '../hooks/useAuthUser'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { completeOnboarding } from '../lib/api'
-import { CameraIcon, LoaderIcon, MapPinIcon, ShuffleIcon, UserCheck } from 'lucide-react'
-import { LANGUAGES } from '../constant'
+import { CameraIcon, LoaderIcon, MapPinIcon, ShuffleIcon, UserCheck } from'lucide-react'
+import { LANGUAGES } from '../constant/index'
 
 const onboardPage = () => {
 

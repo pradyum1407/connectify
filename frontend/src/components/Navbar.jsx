@@ -1,9 +1,9 @@
 import useAuthUser from '../hooks/useAuthUser'
 import { Link, useLocation } from 'react-router'
 import { BellIcon, Infinity, LogOutIcon } from 'lucide-react'
-import ThemeSelector from './Themeselector'
-import useLogout from '../hooks/useLogOut'
-import PageLoader from './pageLoader'
+import ThemeSelector from './ThemeSelector'
+import useLogout from '../hooks/useLogout'
+import PageLoader from './PageLoader'
 
 const Navbar = () => {
   const { authUser } = useAuthUser()

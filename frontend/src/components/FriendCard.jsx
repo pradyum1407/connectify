@@ -1,4 +1,4 @@
-import { LANGUAGE_TO_FLAG } from "../constant";
+import { LANGUAGE_TO_FLAG } from "../constant/index";
 import { Link } from "react-router";
 
 const FriendCard = ({ friend }) => {

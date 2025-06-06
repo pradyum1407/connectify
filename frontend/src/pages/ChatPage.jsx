@@ -1,4 +1,4 @@
-import {useQuery, useQueryClient } from "@tanstack/react-query"
+import {useQuery} from "@tanstack/react-query"
 import { useParams } from "react-router"
 import { getMessages, getUserFriends} from "../lib/api";
 import useAuthUser from "../hooks/useAuthUser";
