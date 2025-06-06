@@ -12,7 +12,7 @@ import Layout from "./components/Layout"
 
 import { Toaster } from "react-hot-toast";
 import useAuthUser from "./hooks/useAuthUser"
-import { useThemeStore } from "./store/usethemestore"
+import { useThemeStore } from "./store/useThemeStore"
 import { useSocketStore } from "./store/useSocketStore"
 import { useEffect } from "react"
 
