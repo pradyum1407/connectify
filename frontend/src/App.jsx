@@ -3,7 +3,7 @@ import { Navigate, Routes, Route } from "react-router"
 import Homepage from "./pages/HomePage"
 import SignUpPage from "./pages/SignUpPage"
 import LoginPage from "./pages/LoginPage"
-import OnboardPage from './pages/onboardPage'
+import OnboardPage from './pages/OnboardPage'
 import ChatPage from "./pages/ChatPage"
 import NotificationPage from "./pages/NotificationPage"
 import PageLoader from "./components/pageLoader"
