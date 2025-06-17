@@ -31,6 +31,7 @@ export async function getAuthUser() {
   }
 }
 
+
 //Users 
 export async function getUserFriends() {
   const response = await axiosInstance.get("/users/friends")
